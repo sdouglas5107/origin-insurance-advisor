@@ -223,7 +223,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("8. If the user's vehicle was produced in the last 5 years, add 1 risk point to that vehicle’s score.", () => {
+  describe("8. If the user's vehicle was produced in the last 5 years, add 1 risk point to that vehicle’s score.", () => {
     test('Should set auto score as "economic" if user\'s vehicle was produced more than 5 years ago', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact

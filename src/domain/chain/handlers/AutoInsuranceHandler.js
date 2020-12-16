@@ -1,3 +1,5 @@
+const { AUTO } = require("../../vo/InsuranceType");
+
 module.exports = class AutoInsuranceHandlers {
   setNext(handler) {
     this.next = handler;
@@ -10,7 +12,7 @@ module.exports = class AutoInsuranceHandlers {
 
   processRiskProfile(userData, userRiskProfile) {
     if (!userData.vehicle) {
-      userRiskProfile.auto = "ineligible";
+      userRiskProfile.makeIneligibleFor(AUTO);
     }
 
     let autoRiskPoints = 0;
@@ -18,9 +20,8 @@ module.exports = class AutoInsuranceHandlers {
       autoRiskPoints++;
     }
 
-    userRiskProfile.addRiskPoints("auto", autoRiskPoints);
-    userRiskProfile.determineTierForInsurance("auto");
-    
+    userRiskProfile.addRiskPoints(AUTO, autoRiskPoints);
+
     return this.next.processRiskProfile(userData, userRiskProfile);
   }
 };

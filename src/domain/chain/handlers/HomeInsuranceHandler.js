@@ -1,15 +1,22 @@
+const { HOME } = require("../../vo/InsuranceType");
+const { MORTGAGED } = require("../../vo/HouseOwnershipStatus");
+
 module.exports = class HomeInsuranceHandler {
   setNext(handler) {
     this.next = handler;
   }
   processRiskProfile(userData, userRiskProfile) {
     if (!userData.house) {
-      userRiskProfile.home = "ineligible";
+      userRiskProfile.makeIneligibleFor(HOME);
     }
-    if (userData.house.ownership_status === "mortgaged") {
-      userRiskProfile.addRiskPoints("home", 1);
+
+    let homeRiskPoints = 0;
+    if (userData.house.ownership_status === MORTGAGED) {
+      homeRiskPoints++;
     }
-    userRiskProfile.determineTierForInsurance("home");
+
+    userRiskProfile.addRiskPoints(HOME, homeRiskPoints);
+
     return this.next.processRiskProfile(userData, userRiskProfile);
   }
 };

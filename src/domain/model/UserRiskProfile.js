@@ -1,13 +1,15 @@
+const InsuranceTier = require("../vo/InsuranceTier");
+const InsuranceType = require("../vo/InsuranceType");
+
 module.exports = class UserRiskProfile {
   constructor() {
     this.updateRiskPoints();
   }
 
-  updateRiskPoints(points = 0) {
-    this.homeRiskPoints = points;
-    this.autoRiskPoints = points;
-    this.lifeRiskPoints = points;
-    this.disabilityRiskPoints = points;
+  updateRiskPoints(riskPoints = 0) {
+    InsuranceType.stringValues.forEach((insuranceType) => {
+      this[`${insuranceType}Score`] = riskPoints;
+    });
   }
 
   calculateBaseScore(riskAnswers) {
@@ -15,32 +17,25 @@ module.exports = class UserRiskProfile {
     this.updateRiskPoints(this.baseScore);
   }
 
-  addRiskPoints(insurance, riskPoints) {
-    this[`${insurance}RiskPoints`] =
-      this[`${insurance}RiskPoints`] + riskPoints;
+  makeIneligibleFor(insuranceType) {
+    this[insuranceType] = InsuranceTier.INELIGIBLE;
   }
 
-  getTierForScore(score) {
-    if (score < 1) {
-      return "economic";
-    }
-    if (score < 3) {
-      return "regular";
-    }
-    return "responsible";
+  addRiskPoints(insuranceType, riskPoints) {
+    this[`${insuranceType}Score`] = this[`${insuranceType}Score`] + riskPoints;
   }
 
-  determineTierForInsurance(insurance) {
-    this[insurance] =
-      this[insurance] || this.getTierForScore(this[`${insurance}RiskPoints`]);
+  setTierFor(insuranceType, tier) {
+    if (this[insuranceType] === InsuranceTier.INELIGIBLE) {
+      return;
+    }
+    this[insuranceType] = tier;
   }
 
   view() {
-    return {
-      home: this.home,
-      auto: this.auto,
-      life: this.life,
-      disability: this.disability,
-    };
+    return InsuranceType.stringValues.reduce((acc, insuranceType) => {
+      acc[insuranceType] = this[insuranceType];
+      return acc;
+    }, {});
   }
 };
