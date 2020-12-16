@@ -165,7 +165,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("5. If the user's house is mortgaged, add 1 risk point to her home score and add 1 risk point to her disability score.", () => {
+  describe("5. If the user's house is mortgaged, add 1 risk point to her home score and add 1 risk point to her disability score.", () => {
     test('Should set home and disability score as "economic" if user\'s house is owned', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact
@@ -184,7 +184,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("6. If the user has dependents, add 1 risk point to both the disability and life scores.", () => {
+  describe.only("6. If the user has dependents, add 1 risk point to both the disability and life scores.", () => {
     test('Should set life and disability score as "economic" if user has no dependents', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact

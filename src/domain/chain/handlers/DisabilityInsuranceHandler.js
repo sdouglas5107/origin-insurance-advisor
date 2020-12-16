@@ -6,9 +6,14 @@ module.exports = class DisabilityInsuranceHandler {
     if (!userData.income || userData.age > 60) {
       userRiskProfile.disability = "ineligible";
     }
-    if(userData.house.ownership_status === 'mortgaged'){
-      userRiskProfile.addRiskPoints("disability", 1);
+    let disabilityRiskPoints = 0;
+    if (userData.house.ownership_status === "mortgaged") {
+      disabilityRiskPoints++;
     }
+    if (userData.dependents) {
+      disabilityRiskPoints++;
+    }
+    userRiskProfile.addRiskPoints("disability", disabilityRiskPoints);
     userRiskProfile.determineTierForInsurance("disability");
     return this.next.processRiskProfile(userData, userRiskProfile);
   }

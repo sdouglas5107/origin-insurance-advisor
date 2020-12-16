@@ -6,6 +6,11 @@ module.exports = class LifeInsuranceHandler {
     if (userData.age > 60) {
       userRiskProfile.life = "ineligible";
     }
+    let lifeRiskPoints = 0;
+    if (userData.dependents) {
+      lifeRiskPoints++;
+    }
+    userRiskProfile.addRiskPoints("life", lifeRiskPoints);
     userRiskProfile.determineTierForInsurance("life");
     return this.next.processRiskProfile(userData, userRiskProfile);
   }
