@@ -102,7 +102,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("3. If the user is under 30 years old, deduct 2 risk points from all lines of insurance. If she is between 30 and 40 years old, deduct 1.", () => {
+  describe("3. If the user is under 30 years old, deduct 2 risk points from all lines of insurance. If she is between 30 and 40 years old, deduct 1.", () => {
     test('Should set all lines of insurance as "economic" if user is under 30 years old', () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
@@ -140,7 +140,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("4. If her income is above $200k, deduct 1 risk point from all lines of insurance.", () => {
+  describe.only("4. If her income is above $200k, deduct 1 risk point from all lines of insurance.", () => {
     test('Should set all all lines of insurance as "regular" if user income is above 200k', () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
