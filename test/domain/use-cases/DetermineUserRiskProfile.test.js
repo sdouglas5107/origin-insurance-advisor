@@ -83,7 +83,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("2. If the user is over 60 years old, she is ineligible for disability and life insurance.", () => {
+  describe("2. If the user is over 60 years old, she is ineligible for disability and life insurance.", () => {
     test("Should set disability and life as ineligible if user has over 60 years old", () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
@@ -102,7 +102,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("3. If the user is under 30 years old, deduct 2 risk points from all lines of insurance. If she is between 30 and 40 years old, deduct 1.", () => {
+  describe.only("3. If the user is under 30 years old, deduct 2 risk points from all lines of insurance. If she is between 30 and 40 years old, deduct 1.", () => {
     test('Should set all lines of insurance as "economic" if user is under 30 years old', () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
@@ -119,7 +119,7 @@ describe("DetermineUserRiskProfile", () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
         age: 31,
-        risk_questions: [1, 1, 0],
+        risk_questions: [1, 1, 1],
       });
       expect(userRiskProfile.auto).toBe("regular");
       expect(userRiskProfile.home).toBe("regular");
