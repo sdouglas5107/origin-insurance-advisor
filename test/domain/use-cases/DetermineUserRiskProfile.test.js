@@ -57,7 +57,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("1. If the user doesn’t have income, vehicles or houses, she is ineligible for disability, auto, and home insurance, respectively.", () => {
+  describe("1. If the user doesn’t have income, vehicles or houses, she is ineligible for disability, auto, and home insurance, respectively.", () => {
     test("Should set disability as ineligible if user has no income", () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
@@ -83,9 +83,12 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("2. If the user is over 60 years old, she is ineligible for disability and life insurance.", () => {
+  describe.only("2. If the user is over 60 years old, she is ineligible for disability and life insurance.", () => {
     test("Should set disability and life as ineligible if user has over 60 years old", () => {
-      const userRiskProfile = determineUserRiskProfile.execute({ age: 61 });
+      const userRiskProfile = determineUserRiskProfile.execute({
+        ...userDataWithoutRiskImpact,
+        age: 61,
+      });
       expect(userRiskProfile.life).toBe("ineligible");
       expect(userRiskProfile.disability).toBe("ineligible");
     });

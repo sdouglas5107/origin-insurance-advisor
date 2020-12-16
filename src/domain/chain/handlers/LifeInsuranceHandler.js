@@ -3,7 +3,10 @@ module.exports = class LifeInsuranceHandler {
     this.next = handler;
   }
   processRiskProfile(userData, userRiskProfile) {
-    userRiskProfile.determineTierForInsurance('life')
+    if (userData.age > 60) {
+      userRiskProfile.life = "ineligible";
+    }
+    userRiskProfile.determineTierForInsurance("life");
     return this.next.processRiskProfile(userData, userRiskProfile);
   }
 };

@@ -3,7 +3,7 @@ module.exports = class DisabilityInsuranceHandler {
     this.next = handler;
   }
   processRiskProfile(userData, userRiskProfile) {
-    if (!userData.income) {
+    if (!userData.income || userData.age > 60) {
       userRiskProfile.disability = "ineligible";
     }
     userRiskProfile.determineTierForInsurance("disability");

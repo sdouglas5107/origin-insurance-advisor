@@ -15,7 +15,10 @@ module.exports = class UserRiskProfile {
     this.updateRiskPoints(this.baseScore);
   }
 
-  addRiskPoints(riskType, riskPoints) {}
+  addRiskPoints(insurance, riskPoints) {
+    this[`${insurance}RiskPoints`] =
+      this[`${insurance}RiskPoints`] + riskPoints;
+  }
 
   getTierForScore(score) {
     if (score < 1) {
