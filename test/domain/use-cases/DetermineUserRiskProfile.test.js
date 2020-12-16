@@ -12,7 +12,7 @@ describe("DetermineUserRiskProfile", () => {
     risk_questions: [0, 0, 0],
   };
 
-  describe.only("0. First, it calculates the base score by summing the answers from the risk questions, resulting in a number ranging from 0 to 3.", () => {
+  describe("0. First, it calculates the base score by summing the answers from the risk questions, resulting in a number ranging from 0 to 3.", () => {
     test('Should set all insurance lines to "economic" if the sum of risk questions is 0', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact
@@ -57,7 +57,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("1. If the user doesn’t have income, vehicles or houses, she is ineligible for disability, auto, and home insurance, respectively.", () => {
+  describe.only("1. If the user doesn’t have income, vehicles or houses, she is ineligible for disability, auto, and home insurance, respectively.", () => {
     test("Should set disability as ineligible if user has no income", () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
@@ -67,18 +67,18 @@ describe("DetermineUserRiskProfile", () => {
     });
 
     test("Should set auto as ineligible if user has no cars", () => {
-      const userData = {
+      const userRiskProfile = determineUserRiskProfile.execute({
+        ...userDataWithoutRiskImpact,
         vehicle: 0,
-      };
-      const userRiskProfile = determineUserRiskProfile.execute();
+      });
       expect(userRiskProfile.auto).toBe("ineligible");
     });
 
     test("Should set home as ineligible if user has no houses", () => {
-      const userData = {
+      const userRiskProfile = determineUserRiskProfile.execute({
+        ...userDataWithoutRiskImpact,
         house: 0,
-      };
-      const userRiskProfile = determineUserRiskProfile.execute();
+      });
       expect(userRiskProfile.home).toBe("ineligible");
     });
   });
