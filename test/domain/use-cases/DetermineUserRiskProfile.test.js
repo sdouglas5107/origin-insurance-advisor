@@ -12,15 +12,15 @@ describe("DetermineUserRiskProfile", () => {
     risk_questions: [0, 0, 0],
   };
 
-  describe("0. First, it calculates the base score by summing the answers from the risk questions, resulting in a number ranging from 0 to 3.", () => {
+  describe.only("0. First, it calculates the base score by summing the answers from the risk questions, resulting in a number ranging from 0 to 3.", () => {
     test('Should set all insurance lines to "economic" if the sum of risk questions is 0', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact
       );
-      assert(userRiskProfile.auto).toBe("economic");
-      assert(userRiskProfile.life).toBe("economic");
-      assert(userRiskProfile.home).toBe("economic");
-      assert(userRiskProfile.disability).toBe("economic");
+      expect(userRiskProfile.auto).toBe("economic");
+      expect(userRiskProfile.life).toBe("economic");
+      expect(userRiskProfile.home).toBe("economic");
+      expect(userRiskProfile.disability).toBe("economic");
     });
 
     test('Should set all insurance lines to "regular" if the sum of risk questions is 1', () => {
@@ -28,10 +28,10 @@ describe("DetermineUserRiskProfile", () => {
         ...userDataWithoutRiskImpact,
         risk_questions: [1, 0, 0],
       });
-      assert(userRiskProfile.auto).toBe("regular");
-      assert(userRiskProfile.life).toBe("regular");
-      assert(userRiskProfile.home).toBe("regular");
-      assert(userRiskProfile.disability).toBe("regular");
+      expect(userRiskProfile.auto).toBe("regular");
+      expect(userRiskProfile.life).toBe("regular");
+      expect(userRiskProfile.home).toBe("regular");
+      expect(userRiskProfile.disability).toBe("regular");
     });
 
     test('Should set all insurance lines to "regular" if the sum of risk questions is 2', () => {
@@ -39,10 +39,10 @@ describe("DetermineUserRiskProfile", () => {
         ...userDataWithoutRiskImpact,
         risk_questions: [1, 1, 0],
       });
-      assert(userRiskProfile.auto).toBe("regular");
-      assert(userRiskProfile.life).toBe("regular");
-      assert(userRiskProfile.home).toBe("regular");
-      assert(userRiskProfile.disability).toBe("regular");
+      expect(userRiskProfile.auto).toBe("regular");
+      expect(userRiskProfile.life).toBe("regular");
+      expect(userRiskProfile.home).toBe("regular");
+      expect(userRiskProfile.disability).toBe("regular");
     });
 
     test('Should set all insurance lines to "responsible" if the sum of risk questions is 3', () => {
@@ -50,10 +50,10 @@ describe("DetermineUserRiskProfile", () => {
         ...userDataWithoutRiskImpact,
         risk_questions: [1, 1, 1],
       });
-      assert(userRiskProfile.auto).toBe("responsible");
-      assert(userRiskProfile.life).toBe("responsible");
-      assert(userRiskProfile.home).toBe("responsible");
-      assert(userRiskProfile.disability).toBe("responsible");
+      expect(userRiskProfile.auto).toBe("responsible");
+      expect(userRiskProfile.life).toBe("responsible");
+      expect(userRiskProfile.home).toBe("responsible");
+      expect(userRiskProfile.disability).toBe("responsible");
     });
   });
 
