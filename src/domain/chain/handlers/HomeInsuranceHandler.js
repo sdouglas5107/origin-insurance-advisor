@@ -6,6 +6,9 @@ module.exports = class HomeInsuranceHandler {
     if (!userData.house) {
       userRiskProfile.home = "ineligible";
     }
+    if (userData.house.ownership_status === "mortgaged") {
+      userRiskProfile.addRiskPoints("home", 1);
+    }
     userRiskProfile.determineTierForInsurance("home");
     return this.next.processRiskProfile(userData, userRiskProfile);
   }

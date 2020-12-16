@@ -5,7 +5,7 @@ describe("DetermineUserRiskProfile", () => {
   const userDataWithoutRiskImpact = {
     age: 41,
     house: { ownership_status: "owned" },
-    income: 200001,
+    income: 200000,
     vehicle: { year: 2014 },
     dependents: 0,
     marital_status: "single",
@@ -140,7 +140,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("4. If her income is above $200k, deduct 1 risk point from all lines of insurance.", () => {
+  describe("4. If her income is above $200k, deduct 1 risk point from all lines of insurance.", () => {
     test('Should set all all lines of insurance as "regular" if user income is above 200k', () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
@@ -156,7 +156,6 @@ describe("DetermineUserRiskProfile", () => {
     test('Should set all all lines of insurance as "responsible" if user income is 200k or less', () => {
       const userRiskProfile = determineUserRiskProfile.execute({
         ...userDataWithoutRiskImpact,
-        income: 200000,
         risk_questions: [1, 1, 1],
       });
       expect(userRiskProfile.auto).toBe("responsible");
@@ -166,7 +165,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("5. If the user's house is mortgaged, add 1 risk point to her home score and add 1 risk point to her disability score.", () => {
+  describe.only("5. If the user's house is mortgaged, add 1 risk point to her home score and add 1 risk point to her disability score.", () => {
     test('Should set home and disability score as "economic" if user\'s house is owned', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact
