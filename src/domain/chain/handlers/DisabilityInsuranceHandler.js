@@ -13,6 +13,9 @@ module.exports = class DisabilityInsuranceHandler {
     if (userData.dependents) {
       disabilityRiskPoints++;
     }
+    if (userData.marital_status === "married") {
+      disabilityRiskPoints--;
+    }
     userRiskProfile.addRiskPoints("disability", disabilityRiskPoints);
     userRiskProfile.determineTierForInsurance("disability");
     return this.next.processRiskProfile(userData, userRiskProfile);

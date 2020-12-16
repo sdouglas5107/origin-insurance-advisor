@@ -10,6 +10,9 @@ module.exports = class LifeInsuranceHandler {
     if (userData.dependents) {
       lifeRiskPoints++;
     }
+    if(userData.marital_status === 'married'){
+      lifeRiskPoints++;
+    }
     userRiskProfile.addRiskPoints("life", lifeRiskPoints);
     userRiskProfile.determineTierForInsurance("life");
     return this.next.processRiskProfile(userData, userRiskProfile);

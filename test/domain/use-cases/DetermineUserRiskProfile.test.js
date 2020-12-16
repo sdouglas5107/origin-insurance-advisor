@@ -184,7 +184,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe.only("6. If the user has dependents, add 1 risk point to both the disability and life scores.", () => {
+  describe("6. If the user has dependents, add 1 risk point to both the disability and life scores.", () => {
     test('Should set life and disability score as "economic" if user has no dependents', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact
@@ -204,7 +204,7 @@ describe("DetermineUserRiskProfile", () => {
     });
   });
 
-  describe("7. If the user is married, add 1 risk point to the life score and remove 1 risk point from disability.", () => {
+  describe.only("7. If the user is married, add 1 risk point to the life score and remove 1 risk point from disability.", () => {
     test('Should set life and disability score to "economic" if user is not married', () => {
       const userRiskProfile = determineUserRiskProfile.execute(
         userDataWithoutRiskImpact
