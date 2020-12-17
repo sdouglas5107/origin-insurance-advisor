@@ -5,7 +5,7 @@ const InsuranceType = {
   DISABILITY: 'disability',
 };
 
-InsuranceType.stringValues = Object.keys(InsuranceType).map(
+InsuranceType.values = Object.keys(InsuranceType).map(
   (prop) => InsuranceType[prop],
 );
 

@@ -13,7 +13,7 @@ module.exports = class ConsolidationHandler {
   }
 
   processRiskProfile(userData, userRiskProfile) {
-    InsuranceType.stringValues.forEach((insuranceType) => {
+    InsuranceType.values.forEach((insuranceType) => {
       const tier = this.getTierForScore(
         userRiskProfile[`${insuranceType}Score`],
       );

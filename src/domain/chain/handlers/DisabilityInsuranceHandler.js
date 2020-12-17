@@ -1,6 +1,6 @@
 const { DISABILITY } = require('../../vo/InsuranceType');
-const { MORTGAGED } = require('../../vo/HouseOwnershipStatus');
-const { MARRIED } = require('../../vo/MaritalStatus');
+const { MORTGAGED } = require('../../../shared/enum/OwnershipStatus');
+const { MARRIED } = require('../../../shared/enum/MaritalStatus');
 
 module.exports = class DisabilityInsuranceHandler {
   setNext(handler) {

@@ -7,7 +7,7 @@ module.exports = class UserRiskProfile {
   }
 
   updateRiskPoints(riskPoints = 0) {
-    InsuranceType.stringValues.forEach((insuranceType) => {
+    InsuranceType.values.forEach((insuranceType) => {
       this[`${insuranceType}Score`] = riskPoints;
     });
   }
@@ -33,7 +33,7 @@ module.exports = class UserRiskProfile {
   }
 
   view() {
-    return InsuranceType.stringValues.reduce((acc, insuranceType) => {
+    return InsuranceType.values.reduce((acc, insuranceType) => {
       acc[insuranceType] = this[insuranceType];
       return acc;
     }, {});
