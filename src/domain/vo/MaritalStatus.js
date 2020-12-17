@@ -1,4 +1,4 @@
 module.exports = {
-  SINGLE: "single",
-  MARRIED: "married",
+  SINGLE: 'single',
+  MARRIED: 'married',
 };

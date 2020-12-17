@@ -1,9 +1,9 @@
-const SetupHandler = require("./SetupHandler");
-const ConsolidationHandler = require("./ConsolidationHandler");
-const AutoInsuranceHandler = require("./handlers/AutoInsuranceHandler");
-const HomeInsuranceHandler = require("./handlers/HomeInsuranceHandler");
-const LifeInsuranceHandler = require("./handlers/LifeInsuranceHandler");
-const DisabilityInsuranceHandler = require("./handlers/DisabilityInsuranceHandler");
+const SetupHandler = require('./SetupHandler');
+const ConsolidationHandler = require('./ConsolidationHandler');
+const AutoInsuranceHandler = require('./handlers/AutoInsuranceHandler');
+const HomeInsuranceHandler = require('./handlers/HomeInsuranceHandler');
+const LifeInsuranceHandler = require('./handlers/LifeInsuranceHandler');
+const DisabilityInsuranceHandler = require('./handlers/DisabilityInsuranceHandler');
 
 module.exports = class InsuranceClient {
   static buildHandlerChain() {

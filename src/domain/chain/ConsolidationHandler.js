@@ -1,5 +1,5 @@
-const InsuranceType = require("../vo/InsuranceType");
-const { ECONOMIC, REGULAR, RESPONSIBLE } = require("../vo/InsuranceTier");
+const InsuranceType = require('../vo/InsuranceType');
+const { ECONOMIC, REGULAR, RESPONSIBLE } = require('../vo/InsuranceTier');
 
 module.exports = class ConsolidationHandler {
   getTierForScore(score) {
@@ -15,7 +15,7 @@ module.exports = class ConsolidationHandler {
   processRiskProfile(userData, userRiskProfile) {
     InsuranceType.stringValues.forEach((insuranceType) => {
       const tier = this.getTierForScore(
-        userRiskProfile[`${insuranceType}Score`]
+        userRiskProfile[`${insuranceType}Score`],
       );
       userRiskProfile.setTierFor(insuranceType, tier);
     });

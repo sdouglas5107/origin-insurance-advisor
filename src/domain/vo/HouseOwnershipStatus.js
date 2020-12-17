@@ -1,4 +1,4 @@
 module.exports = {
-  OWNED: "owned",
-  MORTGAGED: "mortgaged",
+  OWNED: 'owned',
+  MORTGAGED: 'mortgaged',
 };

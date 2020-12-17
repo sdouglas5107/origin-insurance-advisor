@@ -1,4 +1,4 @@
-const { AUTO } = require("../../vo/InsuranceType");
+const { AUTO } = require('../../vo/InsuranceType');
 
 module.exports = class AutoInsuranceHandlers {
   setNext(handler) {
@@ -17,7 +17,7 @@ module.exports = class AutoInsuranceHandlers {
 
     let autoRiskPoints = 0;
     if (this.diffOfYears(userData.vehicle.year) <= 5) {
-      autoRiskPoints++;
+      autoRiskPoints += 1;
     }
 
     userRiskProfile.addRiskPoints(AUTO, autoRiskPoints);

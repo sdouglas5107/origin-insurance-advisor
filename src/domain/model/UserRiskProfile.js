@@ -1,5 +1,5 @@
-const InsuranceTier = require("../vo/InsuranceTier");
-const InsuranceType = require("../vo/InsuranceType");
+const InsuranceTier = require('../vo/InsuranceTier');
+const InsuranceType = require('../vo/InsuranceType');
 
 module.exports = class UserRiskProfile {
   constructor() {
