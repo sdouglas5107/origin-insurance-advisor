@@ -4,14 +4,21 @@
   "description": "Origin Insurance Adivisor",
   "main": "index.js",
   "scripts": {
+    "start": "node -r dotenv/config ./src/application",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint --fix src/** test/**"
   },
   "author": "Douglas Soares <thedouglassoares@gmail.com>",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
