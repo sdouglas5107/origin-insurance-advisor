@@ -3,17 +3,17 @@ const InsuranceType = require('../vo/InsuranceType');
 
 module.exports = class UserRiskProfile {
   constructor() {
-    this.updateRiskPoints();
+    this.setBaseScore(0);
   }
 
-  updateRiskPoints(riskPoints = 0) {
+  updateRiskPoints(riskPoints) {
     InsuranceType.values.forEach((insuranceType) => {
       this[`${insuranceType}Score`] = riskPoints;
     });
   }
 
-  calculateBaseScore(riskAnswers) {
-    this.baseScore = riskAnswers.reduce((acc, answer) => acc + answer, 0);
+  setBaseScore(baseScore) {
+    this.baseScore = baseScore;
     this.updateRiskPoints(this.baseScore);
   }
 

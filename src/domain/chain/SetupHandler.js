@@ -6,7 +6,11 @@ module.exports = class SetupHandler {
   }
 
   processRiskProfile(userData, userRiskProfile) {
-    userRiskProfile.calculateBaseScore(userData.risk_questions);
+    const baseScore = userData.risk_questions.reduce(
+      (acc, answer) => acc + answer,
+      0,
+    );
+    userRiskProfile.setBaseScore(baseScore);
 
     let riskPoints = 0;
     if (userData.age < 30) {
@@ -19,9 +23,7 @@ module.exports = class SetupHandler {
       riskPoints -= 1;
     }
 
-    InsuranceType
-      .values
-      .forEach((insurance) => userRiskProfile.addRiskPoints(insurance, riskPoints));
+    InsuranceType.values.forEach((insurance) => userRiskProfile.addRiskPoints(insurance, riskPoints));
 
     return this.next.processRiskProfile(userData, userRiskProfile);
   }
