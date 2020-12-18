@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r dotenv/config ./src/application",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest test/unit/**",
+    "test:coverage": "jest test/unit/** --coverage",
+    "test:functional": "jest test/functional/**",
     "lint": "eslint --fix src/** test/**"
   },
   "author": "Douglas Soares <thedouglassoares@gmail.com>",
@@ -24,6 +25,7 @@
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "request-promise": "^4.2.6"
   }
 }

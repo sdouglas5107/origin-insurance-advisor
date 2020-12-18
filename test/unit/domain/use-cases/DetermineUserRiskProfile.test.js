@@ -1,6 +1,6 @@
 /* global describe it expect */
 
-const DetermineUserRiskProfile = require('../../../src/domain/use-cases/DetermineUserRiskProfile');
+const DetermineUserRiskProfile = require('../../../../src/domain/use-cases/DetermineUserRiskProfile');
 
 describe('DetermineUserRiskProfile', () => {
   const determineUserRiskProfile = new DetermineUserRiskProfile();
