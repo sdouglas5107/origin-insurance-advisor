@@ -23,7 +23,9 @@ module.exports = class SetupHandler {
       riskPoints -= 1;
     }
 
-    InsuranceType.values.forEach((insurance) => userRiskProfile.addRiskPoints(insurance, riskPoints));
+    InsuranceType
+      .values
+      .forEach((insurance) => userRiskProfile.addRiskPoints(insurance, riskPoints));
 
     return this.next.processRiskProfile(userData, userRiskProfile);
   }

@@ -11,7 +11,6 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
-// Validation error handler
 app.use((err, req, res, next) => {
   if (err.error) {
     return res
@@ -21,7 +20,6 @@ app.use((err, req, res, next) => {
   return next(err);
 });
 
-// Generic error handler
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, _) => res.status(err.status || 500).json({ message: err.message }));
 
