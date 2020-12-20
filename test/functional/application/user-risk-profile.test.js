@@ -1,5 +1,6 @@
 /* global describe, expect, it, beforeAll, afterAll */
 const request = require('request-promise');
+const MockDate = require('mockdate');
 const app = require('../../../src/application/app');
 
 const PORT = '8181';
@@ -8,11 +9,13 @@ let server;
 
 describe('/user-risk-profile', () => {
   beforeAll(() => {
+    MockDate.set('2020-12-01');
     server = app.listen(PORT);
   });
 
   afterAll(() => {
     server.close();
+    MockDate.reset();
   });
 
   const userData = {

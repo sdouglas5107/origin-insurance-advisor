@@ -1,8 +1,17 @@
-/* global describe it expect */
+/* global describe it expect beforeAll afterAll */
+const MockDate = require('mockdate');
 
 const DetermineUserRiskProfile = require('../../../../src/domain/use-cases/DetermineUserRiskProfile');
 
 describe('DetermineUserRiskProfile', () => {
+  beforeAll(() => {
+    MockDate.set('2020-12-01');
+  });
+
+  afterAll(() => {
+    MockDate.reset();
+  });
+
   const determineUserRiskProfile = new DetermineUserRiskProfile();
   const userDataWithoutRiskImpact = {
     age: 41,
