@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
+app.use((req, res) => {
+  res.status(404).json('Route not found');
+});
+
 app.use((err, req, res, next) => {
   if (err.error) {
     return res
