@@ -2,7 +2,31 @@
 
 A service that receives user profile data and determines user risk profile for insurances lines and suggests an insurance plan ("economic", "regular", "responsible") corresponding to his risk profile.
 
-## How to Run
+## Try It On Heroku
+
+```
+curl --location --request POST 'https://origin-insurance-advisor.herokuapp.com/user-risk-profile' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "age": 0,
+    "dependents": 2,
+    "house": {
+        "ownership_status": "owned"
+    },
+    "income": 0,
+    "marital_status": "married",
+    "risk_questions": [
+        0,
+        1,
+        0
+    ],
+    "vehicle": {
+        "year": "2011"
+    }
+}'
+```
+
+## Running Locally
 
 - Install Node Js `v10+`;
 - Copy `.env.example` to file named `.env` and set the `PORT` env with the value you want;
