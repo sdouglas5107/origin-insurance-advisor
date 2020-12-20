@@ -1,4 +1,4 @@
-const { AUTO } = require('../../vo/InsuranceType');
+const { AUTO } = require('../../../shared/enum/InsuranceType');
 
 module.exports = class AutoInsuranceHandlers {
   setNext(handler) {

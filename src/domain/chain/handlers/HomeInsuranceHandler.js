@@ -1,4 +1,4 @@
-const { HOME } = require('../../vo/InsuranceType');
+const { HOME } = require('../../../shared/enum/InsuranceType');
 const { MORTGAGED } = require('../../../shared/enum/OwnershipStatus');
 
 module.exports = class HomeInsuranceHandler {

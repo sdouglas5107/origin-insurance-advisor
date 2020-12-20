@@ -1,4 +1,4 @@
-const { DISABILITY } = require('../../vo/InsuranceType');
+const { DISABILITY } = require('../../../shared/enum/InsuranceType');
 const { MORTGAGED } = require('../../../shared/enum/OwnershipStatus');
 const { MARRIED } = require('../../../shared/enum/MaritalStatus');
 

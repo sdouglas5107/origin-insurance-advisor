@@ -1,4 +1,4 @@
-const { LIFE } = require('../../vo/InsuranceType');
+const { LIFE } = require('../../../shared/enum/InsuranceType');
 const { MARRIED } = require('../../../shared/enum/MaritalStatus');
 
 module.exports = class LifeInsuranceHandler {

@@ -1,4 +1,4 @@
-const InsuranceType = require('../vo/InsuranceType');
+const InsuranceType = require('../../shared/enum/InsuranceType');
 
 module.exports = class SetupHandler {
   setNext(handler) {

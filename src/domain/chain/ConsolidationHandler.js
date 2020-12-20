@@ -1,5 +1,5 @@
-const InsuranceType = require('../vo/InsuranceType');
-const { ECONOMIC, REGULAR, RESPONSIBLE } = require('../vo/InsuranceTier');
+const InsuranceType = require('../../shared/enum/InsuranceType');
+const { ECONOMIC, REGULAR, RESPONSIBLE } = require('../../shared/enum/InsuranceTier');
 
 module.exports = class ConsolidationHandler {
   getTierForScore(score) {
