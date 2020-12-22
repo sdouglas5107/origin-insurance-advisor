@@ -1,18 +1,15 @@
 const { DISABILITY } = require('../../../shared/enum/InsuranceType');
 const { MORTGAGED } = require('../../../shared/enum/OwnershipStatus');
 const { MARRIED } = require('../../../shared/enum/MaritalStatus');
+const BaseHandler = require('../BaseHandler');
 
-module.exports = class DisabilityInsuranceHandler {
-  setNext(handler) {
-    this.next = handler;
-  }
-
-  processRiskProfile(userData, userRiskProfile) {
+module.exports = class DisabilityInsuranceHandler extends BaseHandler {
+  applyRules(userData, userRiskProfile) {
     if (!userData.income || userData.age > 60) {
       userRiskProfile.makeIneligibleFor(DISABILITY);
     }
     let disabilityRiskPoints = 0;
-    if (userData.house.ownership_status === MORTGAGED) {
+    if (userData.house && userData.house.ownership_status === MORTGAGED) {
       disabilityRiskPoints += 1;
     }
     if (userData.dependents) {
@@ -23,6 +20,6 @@ module.exports = class DisabilityInsuranceHandler {
     }
     userRiskProfile.addRiskPoints(DISABILITY, disabilityRiskPoints);
 
-    return this.next.processRiskProfile(userData, userRiskProfile);
+    return userRiskProfile;
   }
 };

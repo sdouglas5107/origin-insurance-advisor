@@ -1,16 +1,13 @@
 const InsuranceType = require('../../shared/enum/InsuranceType');
+const BaseHandler = require('./BaseHandler');
 
-module.exports = class SetupHandler {
-  setNext(handler) {
-    this.next = handler;
-  }
-
-  processRiskProfile(userData, userRiskProfile) {
+module.exports = class SetupHandler extends BaseHandler {
+  applyRules(userData, userRiskProfile) {
     const baseScore = userData.risk_questions.reduce(
       (acc, answer) => acc + answer,
       0,
     );
-    userRiskProfile.setBaseScore(baseScore);
+    userRiskProfile.setBaseScoreAndUpdateRiskPoints(baseScore);
 
     let riskPoints = 0;
     if (userData.age < 30) {
@@ -27,6 +24,6 @@ module.exports = class SetupHandler {
       .values
       .forEach((insurance) => userRiskProfile.addRiskPoints(insurance, riskPoints));
 
-    return this.next.processRiskProfile(userData, userRiskProfile);
+    return userRiskProfile;
   }
 };

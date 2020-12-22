@@ -1,7 +1,8 @@
 const InsuranceType = require('../../shared/enum/InsuranceType');
 const { ECONOMIC, REGULAR, RESPONSIBLE } = require('../../shared/enum/InsuranceTier');
+const BaseHandler = require('./BaseHandler');
 
-module.exports = class ConsolidationHandler {
+module.exports = class ConsolidationHandler extends BaseHandler {
   getTierForScore(score) {
     if (score < 1) {
       return ECONOMIC;
@@ -12,7 +13,7 @@ module.exports = class ConsolidationHandler {
     return RESPONSIBLE;
   }
 
-  processRiskProfile(userData, userRiskProfile) {
+  applyRules(userData, userRiskProfile) {
     InsuranceType.values.forEach((insuranceType) => {
       const tier = this.getTierForScore(
         userRiskProfile[`${insuranceType}Score`],

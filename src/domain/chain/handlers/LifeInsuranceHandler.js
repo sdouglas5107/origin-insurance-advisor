@@ -1,12 +1,9 @@
 const { LIFE } = require('../../../shared/enum/InsuranceType');
 const { MARRIED } = require('../../../shared/enum/MaritalStatus');
+const BaseHandler = require('../BaseHandler');
 
-module.exports = class LifeInsuranceHandler {
-  setNext(handler) {
-    this.next = handler;
-  }
-
-  processRiskProfile(userData, userRiskProfile) {
+module.exports = class LifeInsuranceHandler extends BaseHandler {
+  applyRules(userData, userRiskProfile) {
     if (userData.age > 60) {
       userRiskProfile.makeIneligibleFor(LIFE);
     }
@@ -19,6 +16,6 @@ module.exports = class LifeInsuranceHandler {
     }
     userRiskProfile.addRiskPoints(LIFE, lifeRiskPoints);
 
-    return this.next.processRiskProfile(userData, userRiskProfile);
+    return userRiskProfile;
   }
 };

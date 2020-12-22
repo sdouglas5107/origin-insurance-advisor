@@ -1,4 +1,4 @@
-const SetupHandler = require('./SetupHandler');
+const InitialHandler = require('./InitialHandler');
 const ConsolidationHandler = require('./ConsolidationHandler');
 const AutoInsuranceHandler = require('./handlers/AutoInsuranceHandler');
 const HomeInsuranceHandler = require('./handlers/HomeInsuranceHandler');
@@ -21,9 +21,9 @@ module.exports = class InsuranceClient {
     const disabilityInsuranceHandler = new DisabilityInsuranceHandler();
     disabilityInsuranceHandler.setNext(lifeInsuranceHandler);
 
-    const setupHandler = new SetupHandler();
-    setupHandler.setNext(disabilityInsuranceHandler);
+    const initialHandler = new InitialHandler();
+    initialHandler.setNext(disabilityInsuranceHandler);
 
-    return setupHandler;
+    return initialHandler;
   }
 };

@@ -1,27 +1,24 @@
 const { AUTO } = require('../../../shared/enum/InsuranceType');
+const BaseHandler = require('../BaseHandler');
 
-module.exports = class AutoInsuranceHandlers {
-  setNext(handler) {
-    this.next = handler;
-  }
-
+module.exports = class AutoInsuranceHandlers extends BaseHandler {
   diffOfYears(other) {
     const current = new Date().getFullYear();
     return current - other;
   }
 
-  processRiskProfile(userData, userRiskProfile) {
-    if (!userData.vehicle) {
-      userRiskProfile.makeIneligibleFor(AUTO);
+  applyRules(userData, userRiskProfile) {
+    if (userData.vehicle) {
+      let autoRiskPoints = 0;
+      if (this.diffOfYears(userData.vehicle.year) <= 5) {
+        autoRiskPoints += 1;
+      }
+
+      userRiskProfile.addRiskPoints(AUTO, autoRiskPoints);
+      return userRiskProfile;
     }
+    userRiskProfile.makeIneligibleFor(AUTO);
 
-    let autoRiskPoints = 0;
-    if (this.diffOfYears(userData.vehicle.year) <= 5) {
-      autoRiskPoints += 1;
-    }
-
-    userRiskProfile.addRiskPoints(AUTO, autoRiskPoints);
-
-    return this.next.processRiskProfile(userData, userRiskProfile);
+    return userRiskProfile;
   }
 };

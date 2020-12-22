@@ -3,16 +3,21 @@ const InsuranceType = require('../../shared/enum/InsuranceType');
 
 module.exports = class UserRiskProfile {
   constructor() {
-    this.setBaseScore(0);
+    this.setBaseScoreAndUpdateRiskPoints(0);
+  }
+
+  getScoreNameFor(insuranceType) {
+    return `${insuranceType}Score`;
   }
 
   updateRiskPoints(riskPoints) {
     InsuranceType.values.forEach((insuranceType) => {
-      this[`${insuranceType}Score`] = riskPoints;
+      const insuranceScore = this.getScoreNameFor(insuranceType);
+      this[insuranceScore] = riskPoints;
     });
   }
 
-  setBaseScore(baseScore) {
+  setBaseScoreAndUpdateRiskPoints(baseScore) {
     this.baseScore = baseScore;
     this.updateRiskPoints(this.baseScore);
   }
@@ -22,7 +27,8 @@ module.exports = class UserRiskProfile {
   }
 
   addRiskPoints(insuranceType, riskPoints) {
-    this[`${insuranceType}Score`] = this[`${insuranceType}Score`] + riskPoints;
+    const insuranceScore = this.getScoreNameFor(insuranceType);
+    this[insuranceScore] += riskPoints;
   }
 
   setTierFor(insuranceType, tier) {
