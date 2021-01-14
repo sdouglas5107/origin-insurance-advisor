@@ -250,4 +250,51 @@ describe('DetermineUserRiskProfile', () => {
       expect(userRiskProfile.auto).toBe('regular');
     });
   });
+
+  describe('9. Umbrella Insurance', () => {
+    it('Should set umbrella score as "economic" if base score is zero', () => {
+      const userRiskProfile = determineUserRiskProfile.execute(
+        userDataWithoutRiskImpact,
+      );
+
+      expect(userRiskProfile.umbrella).toBe('economic');
+    });
+
+    it('Should set umbrella ans ineligible when none of other lines is "economic"', () => {
+      const userRiskProfile = determineUserRiskProfile.execute({
+        age: 60,
+        house: { ownership_status: 'mortgaged' },
+        income: 10000,
+        vehicle: { year: 2015 },
+        dependents: 1,
+        marital_status: 'married',
+        risk_questions: [1, 1, 0],
+      });
+
+      expect(userRiskProfile.umbrella).toBe('ineligible');
+    });
+  });
+
+  describe('10. Rent Insurance Line', () => {
+    it('Should set renters as ineligible when house status is different from rented', () => {
+      const userRiskProfile = determineUserRiskProfile.execute(
+        userDataWithoutRiskImpact,
+      );
+      expect(userRiskProfile.renters).toBe('ineligible');
+    });
+    it('Should set renters as economic when house status is rented', () => {
+      const userRiskProfile = determineUserRiskProfile.execute({
+        ...userDataWithoutRiskImpact,
+        house: { ownership_status: 'rented' },
+      });
+      expect(userRiskProfile.renters).toBe('economic');
+    });
+    it('Should set renters as ineligible if user has no houses', () => {
+      const userRiskProfile = determineUserRiskProfile.execute({
+        ...userDataWithoutRiskImpact,
+        house: null,
+      });
+      expect(userRiskProfile.renters).toBe('ineligible');
+    });
+  });
 });

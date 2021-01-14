@@ -3,6 +3,8 @@ const InsuranceType = {
   AUTO: 'auto',
   LIFE: 'life',
   DISABILITY: 'disability',
+  UMBRELLA: 'umbrella',
+  RENTERS: 'renters',
 };
 
 InsuranceType.values = Object.keys(InsuranceType).map(

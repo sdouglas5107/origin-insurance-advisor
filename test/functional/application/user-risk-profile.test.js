@@ -42,6 +42,8 @@ describe('/user-risk-profile', () => {
         disability: 'ineligible',
         home: 'economic',
         life: 'regular',
+        umbrella: 'economic',
+        renters: 'ineligible',
       };
       const response = await request(options);
       expect(response).toEqual(expectedResult);

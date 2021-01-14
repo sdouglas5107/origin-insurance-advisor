@@ -1,8 +1,15 @@
 const InsuranceType = require('../../shared/enum/InsuranceType');
-const { ECONOMIC, REGULAR, RESPONSIBLE } = require('../../shared/enum/InsuranceTier');
+const {
+  ECONOMIC,
+  REGULAR,
+  RESPONSIBLE,
+} = require('../../shared/enum/InsuranceTier');
 const BaseHandler = require('./BaseHandler');
+const InsuranceTier = require('../../shared/enum/InsuranceTier');
 
-module.exports = class ConsolidationHandler extends BaseHandler {
+module.exports = class ConsolidationHandler extends (
+  BaseHandler
+) {
   getTierForScore(score) {
     if (score < 1) {
       return ECONOMIC;
@@ -21,6 +28,17 @@ module.exports = class ConsolidationHandler extends BaseHandler {
       userRiskProfile.setTierFor(insuranceType, tier);
     });
 
-    return userRiskProfile.view();
+    const userProfile = userRiskProfile.view();
+
+    const isEligible = Object.keys(userProfile)
+      .map((key) => ({ key, value: userProfile[key] }))
+      .filter((insurance) => insurance.key !== InsuranceType.UMBRELLA)
+      .some((insurance) => insurance.value === InsuranceTier.ECONOMIC);
+
+    if (!isEligible) {
+      userProfile.umbrella = InsuranceTier.INELIGIBLE;
+    }
+
+    return userProfile;
   }
 };
